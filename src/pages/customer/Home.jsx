@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-
+import { useEffect, useState } from "react";
+import CustomerLayout from "../../layouts/CustomerLayout";
 const Home = () => {
   const [username, setUsername] = useState("");
   const [userId, setUserId] = useState("");
@@ -13,22 +13,24 @@ const Home = () => {
       setUsername(storedUsername);
       setUserId(storedId);
     } else {
-      // Nếu không tìm thấy thông tin trong localStorage, có thể điều hướng đến trang đăng nhập
+      // Nếu không có thông tin trong localStorage => có thể điều hướng login
       console.log("Thông tin người dùng không có trong localStorage");
     }
   }, []);
 
   return (
-    <div>
-      {username && userId ? (
-        <>
-          <h1>{`Đây là giao diện của ${username}`}</h1>
-          <h4>{`Chào mừng bạn, Customer với ID : ${userId}`}</h4>
-        </>
-      ) : (
-        <p>Vui lòng đăng nhập để truy cập giao diện này.</p>
-      )}
-    </div>
+    <CustomerLayout>
+      <div className="card text-center">
+        {username && userId ? (
+          <>
+            <h1 className="mb-2">Đây là giao diện của {username}</h1>
+            <h4>Chào mừng bạn, Customer với ID: {userId}</h4>
+          </>
+        ) : (
+          <p>Vui lòng đăng nhập để truy cập giao diện này.</p>
+        )}
+      </div>
+    </CustomerLayout>
   );
 };
 

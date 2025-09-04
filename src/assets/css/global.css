@@ -1,0 +1,148 @@
+/* =========================
+   Global Styles - Medical Booking
+   ========================= */
+
+/* Reset CSS để đảm bảo đồng bộ giữa các trình duyệt */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Font mặc định (dùng Google Fonts: Poppins) */
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f7f9fc; /* nền sáng, dễ nhìn */
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Liên kết */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  color: #0077b6; /* xanh y tế */
+}
+
+/* Các heading */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  color: #222;
+}
+
+/* Button chung */
+button {
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+button.primary {
+  background-color: #0077b6;
+  color: #fff;
+}
+
+button.primary:hover {
+  background-color: #023e8a;
+}
+
+button.secondary {
+  background-color: #90e0ef;
+  color: #023e8a;
+}
+
+button.secondary:hover {
+  background-color: #48cae4;
+}
+
+/* Container chuẩn */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Navbar chung */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  padding: 15px 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar img {
+  height: 50px;
+}
+
+/* Footer chung */
+.footer {
+  background: #023e8a;
+  color: #fff;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 40px;
+}
+
+/* Utility classes */
+.text-center {
+  text-align: center;
+}
+
+.mt-2 {
+  margin-top: 8px;
+}
+.mt-4 {
+  margin-top: 16px;
+}
+.mt-6 {
+  margin-top: 24px;
+}
+
+.mb-2 {
+  margin-bottom: 8px;
+}
+.mb-4 {
+  margin-bottom: 16px;
+}
+.mb-6 {
+  margin-bottom: 24px;
+}
+
+.p-2 {
+  padding: 8px;
+}
+.p-4 {
+  padding: 16px;
+}
+.p-6 {
+  padding: 24px;
+}
+
+/* Card chung */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
