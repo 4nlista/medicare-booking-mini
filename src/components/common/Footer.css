@@ -31,7 +31,7 @@
 
 .footer-logo {
   width: 150px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .footer p,
@@ -39,6 +39,7 @@
   font-size: 15px;
   line-height: 1.6;
   color: honeydew;
+  margin-top: 15px;
 }
 
 .footer ul {

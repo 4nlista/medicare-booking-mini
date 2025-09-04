@@ -34,7 +34,7 @@ export default function Header() {
             {({ isActive }) => <span>Đặt lịch</span>}
           </NavLink>
           <Link to="/">
-            <button className="secondary">Đăng nhập</button>
+            <button className="logout">Đăng xuất</button>
           </Link>
         </nav>
       </div>
@@ -50,7 +50,7 @@ export default function Header() {
               Đặt lịch
             </NavLink>
             <Link to="/login" onClick={() => setOpen(false)}>
-              Đăng nhập
+              Đăng xuất
             </Link>
           </div>
         </div>

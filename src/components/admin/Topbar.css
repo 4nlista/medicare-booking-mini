@@ -1,0 +1,64 @@
+.topbar {
+  height: 60px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  border-bottom: 1px solid #e5e7eb;
+  margin-left: 220px; /* chừa chỗ cho sidebar */
+}
+
+.topbar-left {
+  font-size: 18px;
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.topbar input[type="text"] {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  font-size: 14px;
+}
+.topbar .search-box {
+  position: relative;
+}
+
+.topbar .search-box input {
+  padding: 6px 35px 6px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  outline: none;
+  font-size: 14px;
+}
+
+.topbar .search-box .search-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6b7280;
+}
+
+.topbar .icon {
+  font-size: 20px;
+  color: #374151;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.topbar .icon:hover {
+  color: #2563eb; /* xanh khi hover */
+}
+
+.topbar .user-icon {
+  font-size: 26px;
+}
