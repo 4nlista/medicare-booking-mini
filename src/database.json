@@ -1,32 +1,284 @@
 {
   "users": [
     {
-      "id": "1",
+      "id": 1,
       "username": "admin",
       "password": "123",
       "email": "admin@gmail.com",
-      "role": "admin"
+      "role": "admin",
+      "status": "active",
+      "last_login": "2025-09-01T10:00:00Z"
     },
     {
-      "id": "2",
+      "id": 2,
       "username": "doctor1",
       "password": "123",
       "email": "doctor1@gmail.com",
-      "role": "doctor"
+      "role": "doctor",
+      "status": "active",
+      "last_login": "2025-09-01T08:30:00Z"
     },
     {
-      "id": "3",
+      "id": 3,
+      "username": "doctor2",
+      "password": "123",
+      "email": "doctor2@gmail.com",
+      "role": "doctor",
+      "status": "active",
+      "last_login": "2025-09-02T09:00:00Z"
+    },
+    {
+      "id": 4,
+      "username": "doctor3",
+      "password": "123",
+      "email": "doctor3@gmail.com",
+      "role": "doctor",
+      "status": "active",
+      "last_login": "2025-09-03T10:00:00Z"
+    },
+    {
+      "id": 5,
       "username": "staff1",
       "password": "123",
       "email": "staff1@gmail.com",
-      "role": "staff"
+      "role": "staff",
+      "status": "active",
+      "last_login": "2025-09-01T11:00:00Z"
     },
     {
-      "id": "4",
+      "id": 6,
+      "username": "staff2",
+      "password": "123",
+      "email": "staff2@gmail.com",
+      "role": "staff",
+      "status": "active",
+      "last_login": "2025-09-02T10:00:00Z"
+    },
+    {
+      "id": 7,
       "username": "customer1",
       "password": "123",
       "email": "customer1@gmail.com",
-      "role": "customer"
+      "role": "customer",
+      "status": "active",
+      "last_login": "2025-09-01T09:00:00Z"
+    },
+    {
+      "id": 8,
+      "username": "customer2",
+      "password": "123",
+      "email": "customer2@gmail.com",
+      "role": "customer",
+      "status": "active",
+      "last_login": "2025-09-02T08:30:00Z"
+    },
+    {
+      "id": 9,
+      "username": "customer3",
+      "password": "123",
+      "email": "customer3@gmail.com",
+      "role": "customer",
+      "status": "active",
+      "last_login": "2025-09-03T08:00:00Z"
+    },
+    {
+      "id": 10,
+      "username": "customer4",
+      "password": "123",
+      "email": "customer4@gmail.com",
+      "role": "customer",
+      "status": "active",
+      "last_login": "2025-09-04T09:15:00Z"
+    }
+  ],
+
+  "profiles": [
+    {
+      "user_id": 2,
+      "full_name": "Nguyễn Văn Hoàng",
+      "dob": "1980-05-15",
+      "gender": "Male",
+      "phone": "0912345678",
+      "address": "Cầu Giấy, Hà Nội",
+      "city": "Hà Nội",
+      "country": "Vietnam"
+    },
+    {
+      "user_id": 3,
+      "full_name": "Trần Thị Lan",
+      "dob": "1985-09-10",
+      "gender": "Female",
+      "phone": "0912345679",
+      "address": "Ba Đình, Hà Nội",
+      "country": "Vietnam"
+    },
+    {
+      "user_id": 4,
+      "full_name": "Phạm Đức Giang",
+      "dob": "1975-11-25",
+      "gender": "Male",
+      "phone": "0912345680",
+      "address": "Lê Chân, Hải Phòng",
+      "country": "Vietnam"
+    },
+    {
+      "user_id": 7,
+      "full_name": "Nguyễn Thị Lan",
+      "dob": "1992-02-05",
+      "gender": "Female",
+      "phone": "0912345681",
+      "address": "Kim Thành, Hải Dương",
+      "country": "Vietnam"
+    },
+    {
+      "user_id": 8,
+      "full_name": "Bùi Minh Đức",
+      "dob": "1989-07-20",
+      "gender": "Male",
+      "phone": "0912345682",
+      "address": "Hà Đông, Hà Nội",
+      "country": "Vietnam"
+    }
+  ],
+
+  "doctors": [
+    {
+      "user_id": 2,
+      "specialization": "Tim Mạch",
+      "room_id": 1,
+      "working_hours": [
+        { "day": "Monday", "start": "08:00", "end": "12:00" },
+        { "day": "Wednesday", "start": "14:00", "end": "18:00" },
+        { "day": "Friday", "start": "08:00", "end": "12:00" }
+      ]
+    },
+    {
+      "user_id": 3,
+      "specialization": "Chỉnh Hình",
+      "room_id": 1,
+      "working_hours": [
+        { "day": "Tuesday", "start": "09:00", "end": "13:00" },
+        { "day": "Thursday", "start": "14:00", "end": "18:00" }
+      ]
+    },
+    {
+      "user_id": 4,
+      "specialization": "Nhi Khoa",
+      "room_id": 2,
+      "working_hours": [
+        { "day": "Monday", "start": "08:00", "end": "12:00" },
+        { "day": "Friday", "start": "14:00", "end": "18:00" }
+      ]
+    }
+  ],
+
+  "appointments": [
+    {
+      "id": 1,
+      "customer_id": 7,
+      "doctor_id": 2,
+      "service_id": 1,
+      "date": "2025-09-05",
+      "time": "09:00",
+      "status": "pending",
+      "payment_status": "unpaid",
+      "payment_id": null,
+      "reason": "Kiểm tra định kỳ",
+      "notes": "Bệnh nhân có tiền sử tăng huyết áp"
+    },
+    {
+      "id": 2,
+      "customer_id": 8,
+      "doctor_id": 3,
+      "service_id": 2,
+      "date": "2025-09-06",
+      "time": "10:00",
+      "status": "confirmed",
+      "payment_status": "paid",
+      "payment_id": 1,
+      "reason": "Xét nghiệm máu",
+      "notes": "Bệnh nhân yêu cầu kiểm tra huyết áp"
+    }
+  ],
+
+  "services": [
+    {
+      "id": 1,
+      "name": "Tư vấn chung",
+      "price": 50,
+      "duration": "30m",
+      "description": "Kiểm tra sức khỏe định kỳ và tư vấn"
+    },
+    {
+      "id": 2,
+      "name": "Xét nghiệm máu",
+      "price": 20,
+      "duration": "15m",
+      "description": "Xét nghiệm máu tiêu chuẩn cho nhiều tình trạng"
+    }
+  ],
+
+  "payments": [
+    {
+      "id": 1,
+      "appointment_id": 2,
+      "amount": 50,
+      "payment_method": "card",
+      "payment_date": "2025-09-05T10:00:00Z",
+      "status": "successful"
+    }
+  ],
+
+  "rooms": [
+    {
+      "id": 1,
+      "name": "City Medical Center",
+      "address": "123 Cầu Giấy",
+      "phone": "123-456-789",
+      "doctors": [2, 3]
+    },
+    {
+      "id": 2,
+      "name": "Children's Health Room",
+      "address": "789 Ba Đình",
+      "phone": "987-654-321",
+      "doctors": [4]
+    }
+  ],
+
+  "feedback": [
+    {
+      "appointment_id": 2,
+      "customer_id": 7,
+      "rating": 5,
+      "comment": "Bác sĩ rất chuyên nghiệp và tư vấn nhiệt tình."
+    }
+  ],
+
+  "doctor_schedule": [
+    {
+      "doctor_id": 2,
+      "date": "2025-09-05",
+      "available_slots": [
+        { "time": "08:00", "status": "available" },
+        { "time": "09:00", "status": "booked", "appointment_id": 1 },
+        { "time": "10:00", "status": "available" }
+      ]
+    }
+  ],
+
+  "patient_history": [
+    {
+      "customer_id": 7,
+      "doctor_id": 2,
+      "appointments": [
+        {
+          "appointment_id": 1,
+          "date": "2025-09-05",
+          "service_id": 1,
+          "notes": "Bệnh nhân bị tăng huyết áp"
+        }
+      ]
     }
   ]
 }
