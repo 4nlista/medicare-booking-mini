@@ -1,0 +1,129 @@
+/* =======================
+   Quản lý người dùng - Giao diện hiện đại
+   ======================= */
+
+/* Tổng thể trang */
+.manage-users-container {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f9;
+  padding: 32px;
+  min-height: 100vh;
+  color: #1f2937;
+}
+
+/* Header */
+.manage-users-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.manage-users-header h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.add-user-btn {
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+}
+
+.add-user-btn:hover {
+  background: linear-gradient(90deg, #2563eb, #1d4ed8);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.5);
+}
+
+/* Bảng */
+.manage-users-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.manage-users-table thead {
+  background-color: #f3f4f6;
+}
+
+.manage-users-table th {
+  padding: 16px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 700;
+  color: #4b5563;
+  text-transform: uppercase;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.manage-users-table td {
+  padding: 16px;
+  font-size: 15px;
+  color: #374151;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Hover cho từng dòng */
+.manage-users-table tbody tr {
+  transition: all 0.2s ease;
+}
+
+.manage-users-table tbody tr:hover {
+  background-color: #f9fafb;
+  box-shadow: inset 4px 0 0 #2563eb;
+}
+
+/* Nút hành động */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.action-btn {
+  border: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Nút sửa */
+.edit-btn {
+  background-color: #10b981;
+}
+
+.edit-btn:hover {
+  background-color: #059669;
+}
+
+/* Nút xóa */
+.delete-btn {
+  background-color: #ef4444;
+}
+
+.delete-btn:hover {
+  background-color: #dc2626;
+}
+
+/* Ngăn xóa admin */
+.delete-btn[disabled] {
+  background-color: #d1d5db;
+  color: #6b7280;
+  cursor: not-allowed;
+  box-shadow: none;
+}

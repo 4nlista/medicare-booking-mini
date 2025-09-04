@@ -1,7 +1,7 @@
-.sidebar {
+.admin-layout .sidebar {
   width: 240px;
-  background: #1f2937; /* xám đậm */
-  color: #fff;
+  background: rgba(235, 236, 240, 0.95); /* nền sáng trong nhẹ */
+  color: #1d054e;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -10,6 +10,8 @@
   top: 0;
   left: 0;
   transition: transform 0.3s ease;
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.08); /* đổ bóng bên phải */
+  backdrop-filter: blur(6px); /* hiệu ứng blur nhẹ như glassmorphism */
 }
 
 .sidebar-logo {
@@ -19,7 +21,7 @@
 }
 
 .sidebar-logo img {
-  width: 180px;
+  width: 130px;
 }
 
 .sidebar-menu {
@@ -46,7 +48,7 @@
 }
 
 .sidebar-link.active {
-  background: #2563eb; /* xanh khi active */
+  background: #052a7a; /* xanh khi active */
   color: #fff;
 }
 
@@ -77,12 +79,12 @@
 
 /* Mobile: ẩn sidebar mặc định */
 @media (max-width: 768px) {
-  .sidebar {
+  .admin-layout .sidebar {
     transform: translateX(-100%);
     z-index: 1000;
   }
 
-  .sidebar.open {
+  .admin-layout .sidebar.open {
     transform: translateX(0);
   }
 
