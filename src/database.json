@@ -203,21 +203,30 @@
 
   "services": [
     {
-      "id": 1,
-      "name": "Tư vấn chung",
-      "price": 50,
-      "duration": "30m",
-      "description": "Kiểm tra sức khỏe định kỳ và tư vấn"
-    },
-    {
-      "id": 2,
-      "name": "Xét nghiệm máu",
-      "price": 20,
-      "duration": "15m",
-      "description": "Xét nghiệm máu tiêu chuẩn cho nhiều tình trạng"
+      "id": 5,
+      "name": "Khám sức khỏe định kỳ",
+      "price": 150,
+      "duration": "1h",
+      "description": "Khám tổng quát sức khỏe cho mọi đối tượng",
+      "packages": [
+        {
+          "name": "Gói cơ bản",
+          "price": 100,
+          "services": ["Tư vấn chung", "Xét nghiệm máu"]
+        },
+        {
+          "name": "Gói nâng cao",
+          "price": 150,
+          "services": [
+            "Tư vấn chung",
+            "Xét nghiệm máu",
+            "Xét nghiệm cholesterol",
+            "Kiểm tra ECG"
+          ]
+        }
+      ]
     }
   ],
-
   "payments": [
     {
       "id": 1,
@@ -235,26 +244,46 @@
       "name": "City Medical Center",
       "address": "123 Cầu Giấy",
       "phone": "123-456-789",
-      "doctors": [2, 3]
+      "doctors": [2, 3],
+      "facilities": ["Wi-Fi", "Đỗ xe miễn phí", "Phòng chờ thoải mái"],
+      "working_hours": [
+        { "day": "Monday", "start": "08:00", "end": "18:00" },
+        { "day": "Tuesday", "start": "08:00", "end": "18:00" }
+      ]
     },
     {
       "id": 2,
       "name": "Children's Health Room",
       "address": "789 Ba Đình",
       "phone": "987-654-321",
-      "doctors": [4]
+      "doctors": [4],
+      "facilities": [
+        "Phòng chơi cho trẻ em",
+        "Wi-Fi miễn phí",
+        "Dịch vụ đưa đón trẻ em"
+      ],
+      "working_hours": [
+        { "day": "Monday", "start": "08:00", "end": "18:00" },
+        { "day": "Wednesday", "start": "08:00", "end": "18:00" }
+      ]
     }
   ],
-
   "feedback": [
     {
       "appointment_id": 2,
       "customer_id": 7,
       "rating": 5,
-      "comment": "Bác sĩ rất chuyên nghiệp và tư vấn nhiệt tình."
+      "comment": "Bác sĩ rất chuyên nghiệp và tư vấn nhiệt tình.",
+      "doctor_id": 3
+    },
+    {
+      "appointment_id": 3,
+      "customer_id": 9,
+      "rating": 4,
+      "comment": "Khám tim mạch khá chi tiết, nhưng tôi muốn có thêm thời gian để hỏi bác sĩ.",
+      "doctor_id": 4
     }
   ],
-
   "doctor_schedule": [
     {
       "doctor_id": 2,
@@ -276,7 +305,29 @@
           "appointment_id": 1,
           "date": "2025-09-05",
           "service_id": 1,
-          "notes": "Bệnh nhân bị tăng huyết áp"
+          "notes": "Bệnh nhân bị tăng huyết áp",
+          "treatment": [
+            "Được kê đơn thuốc điều trị huyết áp",
+            "Khuyên thay đổi chế độ ăn uống"
+          ],
+          "tests": ["Xét nghiệm cholesterol", "Kiểm tra ECG"]
+        }
+      ]
+    },
+    {
+      "customer_id": 9,
+      "doctor_id": 4,
+      "appointments": [
+        {
+          "appointment_id": 3,
+          "date": "2025-09-07",
+          "service_id": 3,
+          "notes": "Khám tim mạch",
+          "treatment": [
+            "Kê đơn thuốc tim mạch",
+            "Khuyên tập thể dục nhẹ nhàng"
+          ],
+          "tests": ["Xét nghiệm điện tim", "Siêu âm tim"]
         }
       ]
     }
