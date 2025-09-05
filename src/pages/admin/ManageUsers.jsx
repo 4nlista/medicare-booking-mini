@@ -15,18 +15,69 @@ const ManageUsers = () => {
   });
   const [isAddingUser, setIsAddingUser] = useState(false);
   const [roleFilter, setRoleFilter] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [error, setError] = useState(null);
 
-  // Load users khi mở trang
+  // State cho modal xác nhận xóa
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+  const [userToDelete, setUserToDelete] = useState(null); // Lưu user muốn xóa
+
   useEffect(() => {
     const fetchUsers = async () => {
       const data = await ManageUsersService.getUsers();
-      setUsers(data);
+      const updatedUsers = data.map((user) => {
+        const savedStatus = localStorage.getItem(`user_${user.id}_status`);
+        return savedStatus ? { ...user, status: savedStatus } : user;
+      });
+      setUsers(updatedUsers);
     };
     fetchUsers();
   }, []);
 
-  // Thêm người dùng mới
+  // Xử lý xóa người dùng
+  const handleDeleteClick = (id) => {
+    setUserToDelete(id); // Lưu user cần xóa
+    setShowConfirmDelete(true); // Hiển thị modal xác nhận
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (userToDelete) {
+      const result = await ManageUsersService.deleteUser(userToDelete);
+      if (result.success) {
+        setUsers(users.filter((u) => u.id !== userToDelete));
+      } else {
+        alert(result.message);
+      }
+    }
+    setShowConfirmDelete(false); // Ẩn modal xác nhận
+    setUserToDelete(null); // Xóa user cần xóa
+  };
+
+  const handleDeleteCancel = () => {
+    setShowConfirmDelete(false); // Đóng modal
+    setUserToDelete(null); // Hủy xóa
+  };
+
+  // Kiểm tra tính hợp lệ khi thêm người dùng mới
+  const validateNewUser = () => {
+    if (!newUser.username || !newUser.password || !newUser.email) {
+      setError("Tất cả các trường đều phải được điền.");
+      return false;
+    }
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(newUser.email)) {
+      setError("Email không hợp lệ.");
+      return false;
+    }
+
+    setError(null);
+    return true;
+  };
+
   const handleAddUser = async () => {
+    if (!validateNewUser()) return;
+
     const result = await ManageUsersService.addUser(newUser);
     if (result.success) {
       setUsers([...users, result.user]);
@@ -37,8 +88,12 @@ const ManageUsers = () => {
     }
   };
 
-  // Cập nhật vai trò người dùng
   const handleRoleChange = async (id, role) => {
+    if (role === "admin") {
+      alert("Không thể thay đổi vai trò của admin.");
+      return;
+    }
+
     const result = await ManageUsersService.updateUser(id, { role });
     if (result.success) {
       setUsers(users.map((u) => (u.id === id ? { ...u, role } : u)));
@@ -47,79 +102,86 @@ const ManageUsers = () => {
     }
   };
 
-  // Xóa người dùng
-  const handleDelete = async (id) => {
-    const result = await ManageUsersService.deleteUser(id);
-    if (result.success) {
-      setUsers(users.filter((u) => u.id !== id));
-    } else {
-      alert(result.message);
-    }
-  };
-
-  // Lọc theo role
   const handleFilterChange = (e) => {
     setRoleFilter(e.target.value);
   };
 
-  // Phân trang
   const filteredUsers = ManageUsersService.filterUsersByRole(users, roleFilter);
-  const currentUsers = ManageUsersService.paginateUsers(
+  const searchedUsers = ManageUsersService.filterUsersBySearch(
     filteredUsers,
+    searchQuery
+  );
+  const currentUsers = ManageUsersService.paginateUsers(
+    searchedUsers,
     currentPage,
     usersPerPage
   );
-  const totalPages = ManageUsersService.totalPages(filteredUsers, usersPerPage);
 
-  // Thay đổi trang
+  const totalPages = ManageUsersService.totalPages(searchedUsers, usersPerPage);
+
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-  // Thay đổi trạng thái active/inactive
   const handleStatusChange = async (id, status) => {
-    const result = await ManageUsersService.updateStatus(id, status);
-    if (result.success) {
-      setUsers(
-        users.map((user) =>
-          user.id === id ? { ...user, status: result.user.status } : user
-        )
-      );
-    } else {
-      alert(result.message);
+    const user = users.find((user) => user.id === id);
+
+    if (user.role === "admin") {
+      alert("Không thể thay đổi trạng thái của tài khoản admin.");
+      return;
     }
+
+    const newStatus = status === "active" ? "inactive" : "active";
+
+    ManageUsersService.saveStatusToLocalStorage(id, newStatus);
+
+    setUsers(
+      users.map((user) =>
+        user.id === id ? { ...user, status: newStatus } : user
+      )
+    );
   };
 
   return (
     <AdminLayout>
       <div className="manage-users-container">
-        {/* Header */}
         <div className="manage-users-header">
           <h1>Quản lý tài khoản</h1>
           <button
             className="add-user-btn"
-            onClick={() => setIsAddingUser(true)} // Show form when clicked
+            onClick={() => setIsAddingUser(true)}
           >
             + Thêm mới
           </button>
         </div>
 
-        {/* Lọc theo role */}
-        <div className="filter-container">
-          <label>Lọc theo role:</label>
-          <select value={roleFilter} onChange={handleFilterChange}>
-            <option value="all">Tất cả</option>
-            <option value="admin">Admin</option>
-            <option value="doctor">Doctor</option>
-            <option value="staff">Staff</option>
-            <option value="customer">Customer</option>
-          </select>
+        <div className="filter-search-container">
+          <div className="filter-container">
+            <label>Lọc theo role:</label>
+            <select value={roleFilter} onChange={handleFilterChange}>
+              <option value="all">Tất cả</option>
+              <option value="admin">Admin</option>
+              <option value="doctor">Doctor</option>
+              <option value="staff">Staff</option>
+              <option value="customer">Customer</option>
+            </select>
+          </div>
+
+          <div className="search-container">
+            <label>Tìm kiếm:</label>
+            <input
+              type="text"
+              placeholder="Tìm theo tên hoặc email"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+          </div>
         </div>
 
-        {/* Form thêm người dùng (modal nhỏ) */}
+        {/* Modal thêm người dùng */}
         {isAddingUser && (
-          <div className="add-user-form-overlay">
-            <div className="add-user-form">
+          <div className="modal-overlay">
+            <div className="modal-content">
               <h3>Thêm người dùng mới</h3>
               <div className="form-group">
                 <label>Username:</label>
@@ -168,6 +230,7 @@ const ManageUsers = () => {
                   <option value="customer">Customer</option>
                 </select>
               </div>
+              {error && <p className="error-message">{error}</p>}
               <div className="form-actions">
                 <button className="btn btn-add" onClick={handleAddUser}>
                   Thêm
@@ -183,16 +246,15 @@ const ManageUsers = () => {
           </div>
         )}
 
-        {/* Table */}
         <table className="manage-users-table">
           <thead>
             <tr>
               <th>ID</th>
               <th>Username</th>
               <th>Email</th>
-              <th>Role</th>
-              <th>Status</th>
-              <th>Actions</th>
+              <th>Vai trò</th>
+              <th>Trạng thái</th>
+              <th>Thao tác</th>
             </tr>
           </thead>
           <tbody>
@@ -205,6 +267,7 @@ const ManageUsers = () => {
                   <select
                     value={user.role}
                     onChange={(e) => handleRoleChange(user.id, e.target.value)}
+                    disabled={user.role === "admin"}
                   >
                     <option value="admin">Admin</option>
                     <option value="doctor">Doctor</option>
@@ -213,7 +276,11 @@ const ManageUsers = () => {
                   </select>
                 </td>
                 <td>
-                  <div className="status-toggle">
+                  <div
+                    className={`status-toggle ${
+                      user.status === "active" ? "online" : "offline"
+                    }`}
+                  >
                     <label className="switch">
                       <input
                         type="checkbox"
@@ -233,8 +300,8 @@ const ManageUsers = () => {
                   <div className="action-buttons">
                     <button
                       className="action-btn delete-btn"
-                      onClick={() => handleDelete(user.id)}
-                      disabled={user.role === "admin"} // ngăn xóa admin
+                      onClick={() => handleDeleteClick(user.id)}
+                      disabled={user.role === "admin"}
                     >
                       Xóa
                     </button>
@@ -245,7 +312,6 @@ const ManageUsers = () => {
           </tbody>
         </table>
 
-        {/* Pagination */}
         <div className="pagination">
           <button
             onClick={() => handlePageChange(currentPage - 1)}
@@ -269,6 +335,26 @@ const ManageUsers = () => {
             Sau
           </button>
         </div>
+
+        {/* Modal xác nhận xóa */}
+        {showConfirmDelete && (
+          <div className="modal-overlay">
+            <div className="modal-content">
+              <h3>Bạn có chắc chắn muốn xóa người dùng này không?</h3>
+              <div className="form-actions">
+                <button
+                  className="btn btn-delete"
+                  onClick={handleDeleteConfirm}
+                >
+                  Có
+                </button>
+                <button className="btn btn-cancel" onClick={handleDeleteCancel}>
+                  Không
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </AdminLayout>
   );

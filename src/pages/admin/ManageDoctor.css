@@ -1,0 +1,277 @@
+/* =====================
+   Container chính
+===================== */
+.manage-doctor-container {
+  padding: 20px;
+}
+
+.manage-doctor-container h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* =====================
+   Ô search
+===================== */
+.doctor-search {
+  width: 100%;
+  max-width: 400px;
+  padding: 8px 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* =====================
+   Bảng danh sách bác sĩ
+===================== */
+.doctor-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.doctor-table th,
+.doctor-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.doctor-table th {
+  background: #033e427e;
+  font-weight: 600;
+}
+
+.doctor-table tr:hover {
+  background: #fafafa;
+}
+
+.doctor-table button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  background: #0094e3f9;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.doctor-table button:hover {
+  background: #00477a;
+}
+
+/* =====================
+   Trạng thái
+===================== */
+.status-active {
+  color: #22ae29;
+  font-weight: bold;
+}
+
+.status-inactive {
+  color: #921515;
+  font-weight: bold;
+}
+
+/* =====================
+   Overlay modal
+===================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* =====================
+   Nội dung modal
+===================== */
+.modal-content {
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  max-height: 90vh;
+  overflow-y: auto;
+
+  /* FIX rộng ngang */
+  width: 85%;
+  max-width: 1100px;
+
+  animation: fadeIn 0.2s ease-in-out;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* =====================
+   Profile layout
+===================== */
+.profile-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.profile-left {
+  text-align: center;
+  border-right: 1px solid #ddd;
+  padding-right: 20px;
+}
+
+.profile-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 3px solid #eee;
+}
+
+.profile-left h2 {
+  margin: 10px 0 5px;
+  font-size: 20px;
+}
+
+.profile-left .role {
+  font-weight: 500;
+  color: #666;
+}
+
+.profile-left .location {
+  color: #888;
+  font-size: 14px;
+}
+
+/* =====================
+   Bên phải: thông tin
+===================== */
+.profile-right h3 {
+  margin-top: 10px;
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 18px;
+  border-left: 4px solid #4caf50;
+  padding-left: 8px;
+}
+
+.info-table {
+  width: 90%;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.info-table th {
+  text-align: left;
+  width: 100%;
+  padding: 8px;
+  color: red;
+  font-weight: 600px;
+}
+
+.info-table td {
+  padding: 8px;
+  color: black;
+  border-bottom: 1px solid #eee;
+}
+
+/* =====================
+   Nút
+===================== */
+.btn-edit {
+  background: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  cursor: pointer;
+  margin-bottom: 15px;
+  transition: background 0.2s;
+}
+
+.btn-edit:hover {
+  background: #1976d2;
+}
+
+.btn-save {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-save:hover {
+  background: #388e3c;
+}
+
+.btn-cancel {
+  background: #ccc;
+  color: #333;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.btn-cancel:hover {
+  background: #b3b3b3;
+}
+
+/* =====================
+   Error text
+===================== */
+.error-text {
+  color: red;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* =====================
+   Animation
+===================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Ép modal full ngang */
+.modal-content {
+  width: 60% !important; /* choán 90% màn hình */
+  max-width: 800px !important; /* ép max rộng hơn */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Grid 2 bên avatar + info */
+.profile-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 30px;
+  width: 100%; /* ép full ngang */
+}
